@@ -15,3 +15,9 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 # smart_dispenser_wallet
+## Following are the proposed functions for the application -
+- [ ] Read IOTA QR,
+- [ ] Connect to network,
+- [ ] Join to IOTA,
+- [ ] Make payment,
+- [ ] Choose requirements
