@@ -1,7 +1,7 @@
 // *****************************************************************************
 // * | File        :	  main.dart
 // * | Author      :   Nidhin Mahesh A
-// * | Function    :   Launch screen
+// * | Function    :   redirects to Launch screen
 // * | Info        :
 // *----------------
 // * | This version:   V1.0.0
@@ -28,6 +28,7 @@
 // THE SOFTWARE.
 
 import 'package:flutter/material.dart';
+import 'package:smart_dispenser/launch.dart';
 
 void main() => runApp(MyApp());
 
