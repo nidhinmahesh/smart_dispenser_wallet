@@ -29,6 +29,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:smart_dispenser/launch.dart';
+import 'services/qr_scan.dart';
+import 'package:smart_dispenser/services/qr_render.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Coolsunday',
+      title: 'Crypto Dispenser',
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.white,
@@ -66,7 +68,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Noto Sans',
         primarySwatch: Colors.blue,
       ),
-      home: Launch(),
+      home: QrScan(),
     );
   }
 }

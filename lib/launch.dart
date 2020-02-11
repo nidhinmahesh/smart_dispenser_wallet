@@ -28,8 +28,6 @@
 
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:awesome_card/awesome_card.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class Launch extends StatefulWidget {
   @override
@@ -53,7 +51,7 @@ class _LaunchState extends State<Launch> {
               IconButton(
                 iconSize: 30.0,
                 padding: EdgeInsets.only(left: 28.0),
-                icon: Icon(EvaIcons.barChart),
+                icon: Icon(EvaIcons.creditCard),
                 onPressed: () {
                   setState(() {
                     _myPage.jumpToPage(0);
@@ -63,20 +61,10 @@ class _LaunchState extends State<Launch> {
               IconButton(
                 iconSize: 30.0,
                 padding: EdgeInsets.only(right: 28.0),
-                icon: Icon(EvaIcons.diagonalArrowRightUp),
+                icon: Icon(EvaIcons.plusSquare),
                 onPressed: () {
                   setState(() {
                     _myPage.jumpToPage(1);
-                  });
-                },
-              ),
-              IconButton(
-                iconSize: 30.0,
-                padding: EdgeInsets.only(left: 28.0),
-                icon: Icon(EvaIcons.diagonalArrowRightDown),
-                onPressed: () {
-                  setState(() {
-                    _myPage.jumpToPage(2);
                   });
                 },
               ),
@@ -102,22 +90,6 @@ class _LaunchState extends State<Launch> {
         children: <Widget>[
           Center(
             child: Container(
-              child: CreditCard(
-                cardNumber: "5450 7879 4864 7854",
-                cardExpiry: "10/25",
-                cardHolderName: "Card Holder",
-                cvv: "456",
-                bankName: "Axis Bank",
-                showBackSide: false,
-                frontBackground: CardBackgrounds.black,
-                backBackground: CardBackgrounds.white,
-                showShadow: true,
-              ),
-            ),
-          ),
-          Center(
-            child: Container(
-              child: Text('Given to the market'),
             ),
           ),
           Center(
