@@ -29,6 +29,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:smart_dispenser/services/qr_scan.dart';
 
 class QrRender extends StatefulWidget {
   final String _setAddr;
@@ -77,7 +78,10 @@ class _QrRenderState extends State<QrRender> {
                   const EdgeInsets.symmetric(horizontal: 64.0, vertical: 32.0),
               child: OutlineButton.icon(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => QrScan(_setAddr)),
+                    );
                   },
                   icon: Icon(EvaIcons.copyOutline),
                   label: Text(

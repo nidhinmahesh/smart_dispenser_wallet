@@ -26,67 +26,77 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-// TODO: require camera permission.
-
 import 'package:flutter/material.dart';
-import 'package:flutter_qr_scanner/qr_scanner_camera.dart';
-
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:smart_dispenser/services/payment.dart';
 
 class QrScan extends StatefulWidget {
+
+  final String _setAddr;
+  QrScan(this._setAddr);
+
   @override
-  _QrScanState createState() => _QrScanState();
+  State<StatefulWidget> createState() => _QrScanState(_setAddr);
 }
 
 class _QrScanState extends State<QrScan> {
-  String _qrInfo = 'Scan a QR/Bar code';
-  bool _camState = false;
 
-  _qrCallback(String code) {
-    setState(() {
-      _camState = false;
-      _qrInfo = code;
-    });
-  }
+  String _setAddr;
 
-  _scanCode() {
-    setState(() {
-      _camState = true;
-    });
-  }
+  _QrScanState(this._setAddr);
 
-  @override
-  void initState() {
-    super.initState();
-    _scanCode();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  var qrText = "";
+  QRViewController controller;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _camState
-          ? Center(
-        child: SizedBox(
-          height: 1000,
-          width: 500,
-          child: QRScannerCamera(
-            onError: (context, error) => Text(
-              error.toString(),
-              style: TextStyle(color: Colors.red),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 5,
+            child: QRView(
+              key: qrKey,
+              onQRViewCreated: _onQRViewCreated,
             ),
-            qrCodeCallback: (code) {
-              _qrCallback(code);
-            },
           ),
-        ),
-      )
-          : Center(
-        child: Text(_qrInfo),
+          Expanded(
+            flex: 1,
+            child: Column(
+              children: <Widget>[
+                Text('Scan result: $qrText'),
+                RaisedButton(
+                  child: Text("Proceed to pay"),
+                    onPressed:() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Payment(_setAddr,qrText)),
+                      );
+                    },),
+              ],
+            ),
+//            child: Center(
+//              child: Text('Scan result: $qrText'),
+//            ),
+          )
+        ],
       ),
     );
+  }
+
+  void _onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    controller.scannedDataStream.listen((scanData) {
+      setState(() {
+        qrText = scanData;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 }

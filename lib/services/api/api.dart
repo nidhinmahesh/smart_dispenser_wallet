@@ -32,21 +32,21 @@ String url = 'http://103.10.24.222:5050/Dispenser';
 
 Future<String>getAddress() async {
   final _response = await http.get('$url/getAddress');
-  print('Response status: ${_response.statusCode}');
+  print('GET ADDR Response status: ${_response.statusCode}');
   print(_response.body);
   return _response.body;
 }
 
 Future<String>postMessage(toAddress, data) async {
   final _message = await http.post('$url/sendData/$toAddress/$data');
-  print('Response status: ${_message.statusCode}');
+  print('POST MSG Response status: ${_message.statusCode}');
   print(_message.body);
   return _message.body;
 }
 
-Future<String>postPayment(toAddress, data) async {
-  final _payment = await http.post('$url/sendData/$toAddress/$data');
-  print('Response status: ${_payment.statusCode}');
+Future<String>postPayment(toAddress, amount) async {
+  final _payment = await http.post('$url/sendData/$toAddress/$amount');
+  print('POST TXN Response status: ${_payment.statusCode}');
   print(_payment.body);
   return _payment.body;
 }
