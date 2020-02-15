@@ -6,8 +6,8 @@
 // *----------------
 // * | This version:   V1.0.0
 // * | Date        :   2020-01-05
-// # | Info        :   This is the launch screen that runs on app launch to check
-//                     login status of the user to the app.
+// # | Info        :   This is code set the launch screen and UI
+//                     theme preference for the entire app.
 // -----------------------------------------------------------------------------
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documnetation files (the "Software"), to deal
@@ -29,8 +29,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:smart_dispenser/launch.dart';
-import 'services/qr_scan.dart';
-import 'package:smart_dispenser/services/qr_render.dart';
 
 void main() => runApp(MyApp());
 
@@ -68,7 +66,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Noto Sans',
         primarySwatch: Colors.blue,
       ),
-      home: QrScan(),
+      home: Launch(),
     );
   }
 }

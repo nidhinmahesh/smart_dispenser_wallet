@@ -28,6 +28,10 @@
 
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_dispenser/services/qr_render.dart';
+import 'package:smart_dispenser/preferences.dart';
+import 'package:smart_dispenser/services/listTransactions.dart';
+import 'package:smart_dispenser/services/api/api.dart';
 
 class Launch extends StatefulWidget {
   @override
@@ -35,6 +39,18 @@ class Launch extends StatefulWidget {
 }
 
 class _LaunchState extends State<Launch> {
+
+  String _setAddr = "no data";
+
+  void initState() {
+    super.initState();
+    if(_setAddr == "no data"){
+      getAddress().then(
+              (String s) => setState(() {_setAddr = s;})
+      );
+    }
+  }
+
   PageController _myPage = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
@@ -89,43 +105,20 @@ class _LaunchState extends State<Launch> {
         },
         children: <Widget>[
           Center(
+            child: ListTransactions(_setAddr),
+          ),
+          Center(
             child: Container(
+              child: QrRender(_setAddr),
             ),
           ),
           Center(
             child: Container(
-              child: Text('Bought from market'),
-            ),
-          ),
-          Center(
-            child: Container(
-              child: Text('App settings'),
-            ),
-          ),
-          Center(
-            child: Container(
-              child: Text('all transactions'),
+              child: Preferences(),
             ),
           ),
         ],
         physics: NeverScrollableScrollPhysics(), // Comment this if you need to use Swipe.
-      ),
-      floatingActionButton: Container(
-        height: 65.0,
-        width: 65.0,
-        child: FittedBox(
-          child: FloatingActionButton(
-            onPressed: () {
-              setState(() {
-                _myPage.jumpToPage(4);
-              });
-            },
-            child: Icon(
-              EvaIcons.bookOutline,
-            ),
-            // elevation: 5.0,
-          ),
-        ),
       ),
     );
   }

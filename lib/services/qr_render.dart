@@ -31,48 +31,60 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QrRender extends StatefulWidget {
+  final String _setAddr;
 
-  final String myId;
-  QrRender(this.myId);
+  QrRender(this._setAddr);
+
   @override
-  _QrRenderState createState() => _QrRenderState(myId);
+  _QrRenderState createState() => _QrRenderState(_setAddr);
 }
 
 class _QrRenderState extends State<QrRender> {
-  String myId;
-  _QrRenderState(this.myId);
+  String _setAddr;
+
+  _QrRenderState(this._setAddr);
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Color(0xFFF4F4F4),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-        SizedBox(height: 100.0),
-        Center(child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 64.0, vertical: 32.0),
-          child: QrImage(
-            data: myId,
-            version: QrVersions.auto,
-            size: 200.0,
+          SizedBox(height: 100.0),
+          Center(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 64.0, vertical: 32.0),
+              child: QrImage(
+                data: _setAddr,
+                version: QrVersions.auto,
+                size: 300.0,
+              ),
+            ),
           ),
-        ),),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: Text("  Show this QR code to recieve payment",
-              style: TextStyle(fontWeight: FontWeight.w700,
-                fontSize: 18.0),),
+            child: Text(
+              "  Show this QR code to recieve payment",
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18.0),
+            ),
           ),
           Spacer(),
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 64.0, vertical: 32.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 64.0, vertical: 32.0),
               child: OutlineButton.icon(
-                  onPressed:(){
+                  onPressed: () {
                     Navigator.pop(context);
-                  }, icon: Icon(EvaIcons.checkmarkCircle), label: Text("Done",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 24.0),)),
+                  },
+                  icon: Icon(EvaIcons.copyOutline),
+                  label: Text(
+                    "Scan QR Code",
+                    style:
+                        TextStyle(fontWeight: FontWeight.w700, fontSize: 24.0),
+                  )),
             ),
           )
         ],
@@ -80,4 +92,3 @@ class _QrRenderState extends State<QrRender> {
     );
   }
 }
-
